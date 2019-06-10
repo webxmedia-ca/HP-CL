@@ -1,7 +1,7 @@
 {
-	"name": "ucalgary-automated-tests",
+	"name": "hope-s-craiglist-tests",
 	"version": "1.0.0",
-	"description": "ucalgary.ca automation tests",
+	"description": "add / edit / remove listings within HopeS's Craiglist",
 	"homepage": "",
 	"scripts": {
 		"HopeSCreateNewListing": "mocha --timeout=75000 --slow=5000 --reporter=spec tests/HopeSCreateNewListing/spec.js --role=craigListUser --failureFatal=1",

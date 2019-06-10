@@ -1,0 +1,42 @@
+{
+  "appsUrls": {
+    "ucLaw": "https://live-uc-ucws-qa.pantheonsite.io",
+    "ucWeb": "",
+    "ucXplore": "",
+    "ucProjName": "",
+    "baseUrl": "https://live-uc-ucws-qa.pantheonsite.io"
+  },
+  "siteadmin": {
+    "credentials": {
+      "username": "siteadmin",
+      "password": "test"
+    }
+  },
+  "contentadmin": {
+    "credentials": {
+      "username": "contentadmin",
+      "password": "test"
+    }
+  },
+  "contenteditor": {
+    "credentials": {
+      "username": "contenteditor",
+      "password": "test"
+    }
+  },
+  "support": {
+    "credentials": {
+      "username": "support",
+      "password": "test"
+    }
+  },
+  "browserStack": {
+    "user": "valeriujecov1",
+    "key": "c8EHLyzv9zWTJ2zGRedY",
+    "debug": true,
+    "console": "verbose",
+    "networkLogs": true,
+    "local": false,
+    "localIdentifier": "AutomationTest -- this is used only when local = true -- do not use local settings yet!"
+  }
+}

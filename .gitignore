@@ -1,0 +1,11 @@
+\.idea
+/npm-debug.log
+/debug.log
+/node_modules/
+/results/*
+!/results/README.md
+/screen-caps/*
+!/screen-caps/README.md
+/package-lock.json
+*.log
+/UnneededExamples/*

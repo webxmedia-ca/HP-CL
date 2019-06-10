@@ -1,0 +1,17 @@
+.idea
+.git
+.log
+#below are some examples of using reg-exes:
+# see more here: https://docs.docker.com/engine/reference/builder/#dockerignore-file
+#*.yml
+#!.gitlab-ci.yml  #here ! means exception
+#  **/*.log
+#
+
+/node_modules
+/UnneededExamples
+#docker-compose.yml
+debug.log
+#ucautomation.iml
+/browserstack-local
+/*/.git

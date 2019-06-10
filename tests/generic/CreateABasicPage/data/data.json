@@ -1,0 +1,13 @@
+{
+  "createBasicPage": {
+    "pageTitle": "Page Title",
+    "isPublished": true,
+    "menuSettingsValues": {
+      "menuLinkTitle": "Menu Title",
+      "menuDescription": "Menu Description",
+      "menuParentItem": "<Main navigation>"
+    },
+    "assignTeams": "Students",
+    "verifyPage": true
+  }
+}

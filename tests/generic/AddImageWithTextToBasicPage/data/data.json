@@ -1,0 +1,35 @@
+{
+	"createBasicPage": {
+		"pageTitle": "Page Title",
+		"isPublished": false,
+		"verifyPage": true
+	},
+	"addImageWithTextBlock": {
+		"addBlockBtnNr": "2",
+		"blockCategory": "UCalgary",
+		"blockExpectedCssLocator": "details[open=open].UCalgary-blocks li>a[href*=ucws_image_text]",
+		"categoryLinkGroupLocator": "details[open=open].UCalgary-blocks:nth-child(21)>ul",
+		"categoryLinkNameToClick": "Add Image with Text",
+		"categoryExpectedCssLocator": "details[id*=edit-settings-teams]",
+		"isReusable": null,
+		"reusableBlockName": null,
+		"teamsCheckBoxesToSelect": null,
+		"expectedCssLocatorAfterBlockAdded": ".draggable:nth-child(1) a[title=\"Edit Image with Text block\"]"
+	},
+	"editImageWithText": {
+		"nrImageWithTextBlockToEdit": "1",
+		"headingValue": "Image with Text Block#1 Heading",
+		"descriptionValue": "Image with Text Block#1 Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam ###",
+		"textPosition": "Left",
+		"backgroundColor": 5,
+		"imageUpload": {
+			"backgroundImage": "ImageWithTextBlockTestImage.png",
+			"imageAltText": "Image With Text Block#1 Alt Text",
+			"cropImage": "Mobile"
+		},
+		"ctaButtons": {
+			"url1": "https://www.google.ca",
+			"btnLabel1": "Img w Txt#1 Btn Lbl"
+		}
+	}
+}

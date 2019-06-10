@@ -4,7 +4,7 @@
 	"description": "add / edit / remove listings within HopeS's Craiglist",
 	"homepage": "",
 	"scripts": {
-		"HopeSCreateNewListing": "mocha --timeout=75000 --slow=5000 --reporter=spec tests/HopeSCreateNewListing/spec.js --role=craigListUser --failureFatal=1",
+		"HopeSCreateNewListings": "mocha --timeout=75000 --slow=5000 --reporter=spec tests/HopeSCreateNewListings/spec.js --role=craigListUser --failureFatal=1",
 		"generic:AllUserRolesLoginLogoutSuccessfully": "mocha --timeout=75000 --slow=5000 --reporter=spec tests/generic/AllUserRolesLoginLogoutSuccessfully/spec.js --role=siteadmin --failureFatal=1",
 		"generic:ValidateInternalMenuAsSiteAdmin": "mocha --timeout=60000 --slow=5000 --reporter=spec tests/generic/ValidateInternalMenuAsSiteAdmin/spec.js --role=siteadmin --failureFatal=1",
 		"generic:ValidateInternalMenuAsContentAdmin": "mocha --timeout=60000 --slow=5000 --reporter=spec tests/generic/ValidateInternalMenuAsContentAdmin/spec.js --role=contentadmin --failureFatal=1",

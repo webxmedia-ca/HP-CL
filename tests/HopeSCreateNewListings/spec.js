@@ -138,5 +138,95 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 		
 		
 		//TO BE CONTINUED --------- fill in the form with fields
+		//maybe verify selected value within the 'category' drop down is right...
+		
+		//Posting title
+		
+		//City or Neighborhood
+		
+		//Description
+		
+		// POSTING DETAILS section:
+		//Rent
+		
+		//SQFT (maybe switch the order)
+		
+		//Housing Type (maybe switch the order)
+		
+		//Laundry
+		
+		//Parking
+		
+		//Bedrooms
+		
+		//Bathrooms
+		
+		/////// CHECKBOXES
+		//Cats ok
+		//Dogs ok
+		//Furnished
+		//No Smoking
+		//Wheelchair Accessible
+		
+		//Available On
+		
+		//Open House Dates
+		
+		
+		/////// CONTACT INFO
+		//email privacy options
+		
+		//show my phone
+		//phone calls ok
+		//text/sms ok
+		
+		//Phone Number
+		
+		//Extension
+		
+		//Contact Name
+		
+		/////// LOCATION INFO
+		//show my address
+		
+		//Street
+		
+		//Cross Street
+		
+		//City
+		
+		///// OK for others to contact you about your services, products or commercial interests
+		
+		////// CLICK CONTINUE
+		
+		// ADD ADDRESS (MAP) --- not sure how will do this
+		
+		////// CLICK CONTINUE
+		
+		
+		
+		///ADD IMAGES: --- TO DO ------------------------------------------------- BIG PIECE ---------------------------
+		const imagesAttachmentFilePath = require('path').join(__dirname, '/attachments/' +
+			listingsValues.postingTitle);
+		it('upload all images of the ' + listingsValues.postingTitle + ' listing', async () => {
+			//count the nr of images
+			let imagesCounter;
+			let eachImageNameArray;
+			
+			//upload all of them one by one
+			let imageAttachmentFilePath = imagesAttachmentFilePath + '/' + eachImageNameArray[i];
+		});
+		
+		
+		//click Done with Images -- when all uploaded
+		
+		
+		////VERIFY IF ALL ARE THERE NOW
+		
+		
+		
+		////click PUBLISH button (if not Published - goes to Draft)
+		
+		
 	});
 });

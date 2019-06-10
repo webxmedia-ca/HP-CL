@@ -1,11 +1,19 @@
 {
   "appsUrls": {
+    "craigListVan": "https://accounts.craigslist.org/login",
+    "craigListVanNot": "https://accounts.craigslist.org/login?rt=L&rp=%2Flogin%2Fhome",
     "ucLaw": "https://law-dev.ucalgary.ca",
     "ucLawStaging": "https://staging-web.ucalgary.ca",
     "ucLawOld": "https://staging-ucws.pantheonsite.io",
     "ucWeb": "https://staging-web.ucalgary.ca",
     "ucXplore": "",
     "ucProjName": "http://project-name.ucalgary.ca"
+  },
+  "craigListUser": {
+    "credentials": {
+      "username": "listings@hopestreet.ca",
+      "password": "Hopestreet5220"
+    }
   },
   "siteadmin": {
     "credentials": {

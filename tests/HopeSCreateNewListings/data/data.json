@@ -4,6 +4,42 @@
 		"locationThatFitsBest": "1",
 		"typeOfPosting": "ho",
 		"postingCategory": "1",
-		"postingTitle": "1 Bedroom Contemporary Laneway House for Rent in Point Grey"
+		"postingTitle": "Furnished 2 Bedroom Apartment for Rent in Richmond",
+		"cityOrNeighborhood": "Richmond 103, 6233 Katsura Street",
+		"postalCode": "V6Y4K1",
+		"postingDescription": "Welcome to Hamptons Park, one of the most desirable communities perfect for young families. This unique &amp; only suite feels like a townhouse with its own entrance &amp; entertainment style 200 sqft of private patio space. This open 2 bedroom &amp; 2 bathroom home features over 1100 sqft of living space with dedicated dining area, gourmet kitchen, high quality cabinetry, gas stove, granite counters, engineered floors, and 1 parking. Excellent facilities with indoor pool, club house, sauna/steam, gym &amp; guest suites. Take an evening stroll to the Garden City park or take in tennis on the weekends this home has it all.\n\nPlease book a showing in the following link:\nhttps://showmojo.com/l/392376a09a/6233-katsura-street-east-103-richmond-bc",
+		"postingDetails": {
+			"rentPrice": "2250",
+			"sqft": "1100",
+			"housingType": "apartment",
+			"laundry": "w/d in unit",
+			"parking": "-",
+			"bedrooms": "2",
+			"bathrooms": "2",
+			"catsOk": false,
+			"dogsOk": false,
+			"furnished": true,
+			"noSmoking": true,
+			"wheelchairAccessible": false,
+			"availableOn": "Fri, 14 Jun 2019",
+			"openHouseDates1": null,
+			"openHouseDates2": null,
+			"openHouseDates3": null
+		},
+		"contactInfo": {
+			"emailPrivacy": "no replies to this email",
+			"showMyPhoneNumber": true,
+			"phoneCallsOk": true,
+			"textSmsOk": true,
+			"phoneNumber": "(604) 619-7777",
+			"extension": null,
+			"contactName": "Ken Zhou"
+		},
+		"locationInfo": {
+			"street": "103, 6233 Katsura Street",
+			"crossStreet": null,
+			"city": "Richmond"
+		},
+		"okForOthersToContactAboutOtherServices": false
 	}
 }

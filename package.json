@@ -32,7 +32,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://git.caas.ucalgary.ca/ws/drupal8/qa/automation-testing.git"
+		"url": "https://github.com/webxmedia-ca/HP-CL"
 	},
 	"author": "Valeriu Jecov",
 	"license": "MIT",

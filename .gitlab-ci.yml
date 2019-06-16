@@ -1,6 +1,6 @@
 #################################################################################################################
 #image: docker
-image: git.caas.ucalgary.ca:4567/valeriu.jecov/ucautomation:latest
+image: n/a
 
 #################################################################################################################
 before_script:
@@ -39,11 +39,11 @@ autoRun_Group1:
 
   environment:  # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 autoRun_Group2:
-  image: git.caas.ucalgary.ca:4567/ws/drupal8/qa/automation-testing
+  image: n/a
   stage: tests_run_automated
   script:
     - echo "automated test run -------------------------------------------------------------------------------------"
@@ -72,7 +72,7 @@ autoRun_Group2:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 
 
@@ -146,7 +146,7 @@ CreateABasicPage:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 CreateEditDeleteABasicPage:
@@ -164,7 +164,7 @@ CreateEditDeleteABasicPage:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 AddHeroCTAToBasicPage:
@@ -182,7 +182,7 @@ AddHeroCTAToBasicPage:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 AddTextHeroCTAToBasicPage:
@@ -200,7 +200,7 @@ AddTextHeroCTAToBasicPage:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 AddAccordionToBasicPage:
@@ -218,7 +218,7 @@ AddAccordionToBasicPage:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 AddBannerToBasicPage:
@@ -236,7 +236,7 @@ AddBannerToBasicPage:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 AddChecklistToBasicPage:
@@ -254,7 +254,7 @@ AddChecklistToBasicPage:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 AddMoreInfoToBasicPage:
@@ -272,7 +272,7 @@ AddMoreInfoToBasicPage:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 AddDividerToBasicPage:
@@ -290,7 +290,7 @@ AddDividerToBasicPage:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 AddInfoShimToBasicPage:
@@ -308,7 +308,7 @@ AddInfoShimToBasicPage:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 AddSidekickToBasicPage:
@@ -326,7 +326,7 @@ AddSidekickToBasicPage:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 AddTextToBasicPage:
@@ -344,7 +344,7 @@ AddTextToBasicPage:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 AddImageToBasicPage:
@@ -362,7 +362,7 @@ AddImageToBasicPage:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 AddImageWithTextToBasicPage:
@@ -380,7 +380,7 @@ AddImageWithTextToBasicPage:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 AddRelatedContentToBasicPage:
@@ -398,7 +398,7 @@ AddRelatedContentToBasicPage:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 AddStreamingMediaToBasicPage:
@@ -416,7 +416,7 @@ AddStreamingMediaToBasicPage:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 AddMarketoToBasicPage:
@@ -434,7 +434,7 @@ AddMarketoToBasicPage:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 NOT_DONE_AddTestimonialToBasicPage:
@@ -452,7 +452,7 @@ NOT_DONE_AddTestimonialToBasicPage:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 
 AddCampusMapToBasicPage:
@@ -470,7 +470,7 @@ AddCampusMapToBasicPage:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 AllUserRolesLoginLogoutSuccessfully:
@@ -488,7 +488,7 @@ AllUserRolesLoginLogoutSuccessfully:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 ValidateInternalMenuAsSiteAdmin:
@@ -506,7 +506,7 @@ ValidateInternalMenuAsSiteAdmin:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 ValidateInternalMenuAsContentAdmin:
@@ -524,7 +524,7 @@ ValidateInternalMenuAsContentAdmin:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 ValidateInternalMenuAsContentEditor:
@@ -542,7 +542,7 @@ ValidateInternalMenuAsContentEditor:
 
   environment:    # not sure what the one below does - is it needed?!
     name: ${env}
-    url: https://***.ucalgary.ca
+    url: http://.webxmedia.ca
 
 #################################################################################################################
 

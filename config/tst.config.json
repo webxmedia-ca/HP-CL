@@ -40,8 +40,8 @@
     }
   },
   "browserStack": {
-    "user": "valeriujecov1",
-    "key": "c8EHLyzv9zWTJ2zGRedY",
+    "user": "***",
+    "key": "****",
     "osName": "Windows",
     "osVersion": "7",
     "browserName": "Chrome",

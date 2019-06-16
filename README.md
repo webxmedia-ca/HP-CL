@@ -1,7 +1,5 @@
-# University of Calgary's Automated Tests
-This repo defines the automated tests suites for UofC. The git url is:
-~~https://git.caas.ucalgary.ca/valeriu.jecov/ucautomation.git~~
-https://git.caas.ucalgary.ca/ws/drupal8/qa/automation-testing.git 
+# HopeS's Automated Tests - Craiglist Postings
+This repo defines the automated tests suites for HopeS. The git url is: https://github.com/webxmedia-ca/HP-CL
 
 
 # Dependencies

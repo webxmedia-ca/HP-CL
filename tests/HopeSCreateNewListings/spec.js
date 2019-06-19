@@ -509,7 +509,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					}
 					
 					// CLICK CONTINUE
-					it('click continue button', async () => {
+					it('click the continue button', async () => {
 						await UofC.clickElementByCSS('button[value=continue]');
 					});
 				});
@@ -517,7 +517,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 			
 			//add map page displayed --- click Find or Continue ---- ADD ADDRESS (MAP) --- not sure how will do this
 			describe('add the map', () => {
-				it('wait for add map page to load', async () => {
+				it('wait for the add map page to load', async () => {
 					await UofC.waitForObjectLoad('#map', waitLong, 500, true);
 				});
 				
@@ -534,50 +534,127 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 				});
 				*/
 				
-				it('click continue button', async () => {
+				it('click the continue button', async () => {
 					await UofC.clickElementByCSS('button[class*=continue]');    //<--- returns error if address is wrong/not found on the map
 				});
 			});
 			
 			///ADD IMAGES: --- TO DO ------------------------------------------------- BIG PIECE ---------------------------
 			describe('add the images', () => {
-				const imagesAttachmentFilePath = require('path').join(__dirname, '/attachments/' + listingsValues.postingTitle);
+				const attachmentImagesFolderPath = require('path').join(__dirname, '/attachments/' + listingsValues.postingTitle);
 				
 				//// COUNT NR OF FILES
 				const fs = require('fs');
-				const dir = imagesAttachmentFilePath;
+				let imageFiles, attachmentImageFilePath;
 				
-				fs.readdir(dir, (err, files) => {
-					console.log('\n\nnr of image files:' + files.length + '\n\n\n');   //WORKS
+				/*
+				fs.readdir(imagesAttachmentFolderPath, (err, files) => {
+					console.log('\n\nnr of image files:' + files.length + '\n');   //WORKS - not available externally
 				});
 				
-				//NOW build the ARRAY WITH IMAGE NAMES
-				//GET EACH NAME & ADD IT TO THE imagesAttachmentFilePath
+				fs.readdirSync(imagesAttachmentFolderPath).forEach(file => {
+					console.log('file:' + file);    //WORKS - not available externally
+				});
+				*/
 				
-				it('wait for add images page to load', async () => {
+				///// BUILD THE ARRAY WITH THE RETURNED IMAGE NAMES / FULL PATHS
+				imageFiles = fs.readdirSync(attachmentImagesFolderPath);
+				
+				//this FOR is not needed - TEMP
+				for (let i = 0; i < imageFiles.length; i++) {
+					//GET EACH NAME & ADD IT INTO THE imageFiles array
+					attachmentImageFilePath = attachmentImagesFolderPath + '/' + imageFiles[i];
+					console.log('attachmentImageFilePath: ' + attachmentImageFilePath);
+				}
+				// console.log('outside - imageFiles:' + imageFiles);
+				
+				it('wait for the add images page to load', async () => {
 					await UofC.waitForObjectLoad('#plupload', waitLong, 500, true);
 				});
 				
-				
-				/////// TODO NEXT:
 				it('upload all images of the ' + listingsValues.postingTitle + ' listing', async () => {
-					//count the nr of images
-					let imagesCounter;
-					let eachImageNameArray;
+					//driver.findElement(By.id("input1")).sendKeys("path/to/first/file-001 \n path/to/first/file-002 \n path/to/first/file-003");
 					
 					//upload all of them one by one
-					let imageAttachmentFilePath = imagesAttachmentFilePath + '/' + eachImageNameArray[i];
-					await UofC.setFileUploadByCSS('input[id*=html][type=file]', imageAttachmentFilePath);
+					for (let i = 0; i < imageFiles.length; i++) {
+						attachmentImageFilePath = attachmentImagesFolderPath + '/' + imageFiles[i];
+						// NOTE: if below is not working then press the 'use classic uploader' and try again
+						await UofC.setFileUploadByCSS('input[id*=html][type=file]', attachmentImageFilePath);
+						
+						//check the image upload block is displayed
+						await UofC.waitForObjectLoad('.loading', waitShort, 100, true);
+						await UofC.waitForObjectLoad('.ui-progressbar', waitShort, 100, true);
+						await UofC.waitForObjectLoad('.ui-progressbar-value', waitShort, 100, true);
+						
+						// WAIT UNTIL THE IMAGE IS UPLOADED (THE IMAGE UPLOAD BLOCK IS GONE)
+						let imageUploaderProgressBar = await driver.findElements(By.css('.ui-progressbar-value'));
+						if (imageUploaderProgressBar.length > 0) {
+							let i = 0;
+							while (i < 10 && imageUploaderProgressBar.length > 0) {// && elementSpinner) {
+								// console.log('\n\n\nspinner found - waiting while it is there, i=' + i);
+								await driver.sleep(waitLong * 2);
+								
+								//check again if the spinner is still there / exists
+								imageUploaderProgressBar = await driver.findElements(By.css('.ui-progressbar-value'));
+								
+								if (imageUploaderProgressBar.length === 0) {
+									i = 10;
+								} else if(imageUploaderProgressBar > 0) {
+									imageUploaderProgressBar = await driver.findElements(By.css('.ui-progressbar-value'));
+									i++;
+									if (i === 10 && imageUploaderProgressBar.length > 0) {
+										console.warn('WARNING: image loading block is not gone yet, waited ' +
+											(waitLong * 10) + ' seconds for it to disappear but it did not');
+									}
+								}
+							}
+						}
+					}
 				});
 				
-				
 				//click Done with Images -- when all uploaded
-				
+				it('click the done button', async () => {
+					await UofC.clickElementByCSS('button.done');
+				});
 				
 				////VERIFY IF ALL ARE THERE NOW
+				it('wait for the posting preview page to load', async () => {
+					await UofC.waitForObjectLoad('.draft_warning', waitLong, 500, true);
+				});
+				
+				UofC.validateDisplayedTextContains('.draft_warning', 'this is an unpublished draft.');
+				
+				///TODO: validation after post created but not published
+				//validate the title is correct
+				
+				//validate the description is correct
+				
+				//validate the price is correct
+				
+				//validate the sqft is correct
+				
+				//validate the address is correct
+				
+				//....etc - validate all possible values
+				
+				
 				
 				
 				////click PUBLISH button (if not Published - goes to Draft)
+				it('click publish button', async () => {
+					await UofC.clickElementByCSS('button.button');
+				});
+				
+				it('wait for the posting confirmation page to load', async () => {
+					await UofC.waitForObjectLoad('.new-form h4', waitLong, 500, true);
+				});
+				
+				UofC.validateDisplayedTextEquals('.new-form h4', 'Thanks for posting! We really appreciate it!');
+				UofC.validateDisplayedTextContains('.new-form ul>li:nth-child(1) a', (listingsValues.postingTitle).replace(' ', '-'));
+				
+				it('wait', async () => {
+					console.log('wait');
+				});
 			});
 		});
 		

@@ -58,8 +58,9 @@ LABEL license=MIT version=$VERSION authors=ValeriuJecov Description="This image 
 #COPY lib/harness.js /ucautomation/lib/
 #COPY lib/harness-json.js /ucautomation/lib/
 #COPY lib/jira-updater.js /ucautomation/lib/
-#COPY lib/UofCApps-base.js /ucautomation/lib/
-#COPY lib/UofCApps.js /ucautomation/lib/
+#COPY lib/Common.js /ucautomation/lib/
+#COPY lib/AppRelated-General.js /ucautomation/lib/
+#COPY lib/AppRelated-PageObjectModel.js /ucautomation/lib/
 #####--------------------------------------------------------------------------------#####
 
 

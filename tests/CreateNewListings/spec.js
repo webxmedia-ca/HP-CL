@@ -8,7 +8,7 @@ const waitShort = 2000;
 const waitLong = 5000;
 const harness = require('../../lib/harness');
 const HarnessJson = require('../../lib/harness-json');
-const UofC = require('../../lib/UofCApps');
+const TestApp = require('../../lib/AppRelated-General');
 const expect = require('chai').expect;
 
 describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harness.getCommandLineArgs().role +
@@ -21,9 +21,9 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 	
 	before(async () => {
 		harnessObj = await harness.init();
-		await UofC.init(harnessObj, waitShort, waitLong);
-		await UofC.startApp();
-		await UofC.login();
+		await TestApp.init(harnessObj, waitShort, waitLong);
+		await TestApp.startApp();
+		await TestApp.login();
 		driver = harnessObj.driver;
 		By = harnessObj.By;
 		until = harnessObj.until;
@@ -34,7 +34,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 	});
 	
 	afterEach(async () => {
-		await UofC.afterEachTest(this.ctx.currentTest);
+		await TestApp.afterEachTest(this.ctx.currentTest);
 	});
 	
 	/*
@@ -69,61 +69,61 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 		
 		describe('# ' + (i + 1) + '. add a new post with the ' + listingsValues[i].postingTitle + ' title', () => {
 			describe('creating the new post within the ' + listingsValues[i].postingRegionLocation + ' area', () => {
-				UofC.validateDisplayedTextContains('.new_posting_thing', 'new posting in:');
+				TestApp.validateDisplayedTextContains('.new_posting_thing', 'new posting in:');
 				
 				it('set the posting region to ' + listingsValues[i].postingRegionLocation, async () => {
-					//dropdown values:
 					/*
+					dropdown values:
 					vancouver, BC,
 						BC,
 						CA
 					*/
-					await UofC.setSelectFieldValueByCSS('form.new_posting_thing>select', listingsValues[i].postingRegionLocation);
+					await TestApp.setSelectFieldValueByCSS('form.new_posting_thing>select', listingsValues[i].postingRegionLocation);
 				});
 				
 				it('click go button', async () => {
-					await UofC.clickElementByCSS('button[value="go"]');
+					await TestApp.clickElementByCSS('button[value="go"]');
 				});
 				
 				it('validate the correct page has loaded -> choose the location that fits best', async () => {
-					await UofC.waitForObjectLoad('.picker>.selection-list', waitLong, 500, true);
-					await UofC.waitForObjectLoad('.formnote:nth-child(1)>b', waitShort, 500, true);
+					await TestApp.waitForObjectLoad('.picker>.selection-list', waitLong, 500, true);
+					await TestApp.waitForObjectLoad('.formnote:nth-child(1)>b', waitShort, 500, true);
 				});
 				
-				UofC.validateDisplayedTextEquals('.formnote:nth-child(1)>b', 'choose the location that fits best:');
+				TestApp.validateDisplayedTextEquals('.formnote:nth-child(1)>b', 'choose the location that fits best:');
 			});
 			
 			describe('chose the nearest area', () => {
 				it('set the location that fits best as ' + listingsValues[i].locationThatFitsBest, async () => {
-					await UofC.setButtonRadioFieldValueByCSS('.picker>.selection-list input', listingsValues[i].locationThatFitsBest); //'1'
+					await TestApp.setButtonRadioFieldValueByCSS('.picker>.selection-list input', listingsValues[i].locationThatFitsBest); //'1'
 				});
 				
 				/*
 				it('click the continue button', async () => {
 					console.log('wait - not needed here - automatically loads next page when radio tbn is selected');
-					await UofC.clickElementByCSS('button[value=Continue]');
+					await TestApp.clickElementByCSS('button[value=Continue]');
 				});
 				*/
 				
 				it('validate the correct page has loaded -> choose type of posting', async () => {
-					await UofC.waitForObjectLoad('.picker>.selection-list', waitLong, 500, true);
-					await UofC.waitForObjectLoad('.formnote>b', waitShort, 500, true);
+					await TestApp.waitForObjectLoad('.picker>.selection-list', waitLong, 500, true);
+					await TestApp.waitForObjectLoad('.formnote>b', waitShort, 500, true);
 				});
 				
-				UofC.validateDisplayedTextEquals('.formnote>b', 'what type of posting is this:');
+				TestApp.validateDisplayedTextEquals('.formnote>b', 'what type of posting is this:');
 			});
 			
 			describe('choose the type', () => {
 				it('set the type of posting as ' + listingsValues[i].typeOfPosting, async () => {
-					await UofC.setButtonRadioFieldValueByCSS('.picker>.selection-list input', listingsValues[i].typeOfPosting);    //'ho'
+					await TestApp.setButtonRadioFieldValueByCSS('.picker>.selection-list input', listingsValues[i].typeOfPosting);    //'ho'
 				});
 				
 				it('validate the correct page has loaded -> choose category', async () => {
-					await UofC.waitForObjectLoad('.variant-radio', waitLong, 500, true);
-					await UofC.waitForObjectLoad('.formnote>b', waitShort, 500, true);
+					await TestApp.waitForObjectLoad('.variant-radio', waitLong, 500, true);
+					await TestApp.waitForObjectLoad('.formnote>b', waitShort, 500, true);
 				});
 				
-				UofC.validateDisplayedTextEquals('.formnote>b', 'please choose a category:');
+				TestApp.validateDisplayedTextEquals('.formnote>b', 'please choose a category:');
 			});
 			
 			describe('choose the category', () => {
@@ -144,15 +144,15 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					expect(categoryToSelectText.toLowerCase()).to.contain(expectedValue);
 					
 					//now select the radio btn
-					await UofC.setButtonRadioFieldValueByCSS('.variant-radio input', listingsValues[i].postingCategory); //'1' = apts/housing for rent
+					await TestApp.setButtonRadioFieldValueByCSS('.variant-radio input', listingsValues[i].postingCategory); //'1' = apts/housing for rent
 				});
 				
 				it('validate the correct page has loaded -> create posting', async () => {
-					await UofC.waitForObjectLoad('#postingForm', waitLong, 500, true);
-					await UofC.waitForObjectLoad('input[name=PostingTitle]', waitShort, 500, true);
+					await TestApp.waitForObjectLoad('#postingForm', waitLong, 500, true);
+					await TestApp.waitForObjectLoad('input[name=PostingTitle]', waitShort, 500, true);
 				});
 				
-				UofC.validateDisplayedTextEquals('.contact-info p', 'listings@hopestreet.ca');
+				TestApp.validateDisplayedTextEquals('.contact-info p', 'listings@hopestreet.ca');
 			});
 			
 			describe('fill in the posting values', () => {
@@ -163,24 +163,24 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 				describe('set up the main post\'s values', () => {
 					//Posting title
 					it('type the posting title as ' + listingsValues[i].postingTitle, async () => {
-						await UofC.setTextFieldValueByCSS('input[name=PostingTitle]', listingsValues[i].postingTitle);
+						await TestApp.setTextFieldValueByCSS('input[name=PostingTitle]', listingsValues[i].postingTitle);
 					});
 					
 					//City or Neighborhood
 					if (listingsValues[i].cityOrNeighborhood) {
 						it('type the city or neighborhood as ' + listingsValues[i].cityOrNeighborhood, async () => {
-							await UofC.setTextFieldValueByCSS('input[name=GeographicArea]', listingsValues[i].cityOrNeighborhood);
+							await TestApp.setTextFieldValueByCSS('input[name=GeographicArea]', listingsValues[i].cityOrNeighborhood);
 						});
 					}
 					
 					//Posting postal code
 					it('type the posting title as ' + listingsValues[i].postalCode, async () => {
-						await UofC.setTextFieldValueByCSS('input[name=postal]', listingsValues[i].postalCode);
+						await TestApp.setTextFieldValueByCSS('input[name=postal]', listingsValues[i].postalCode);
 					});
 					
 					//Description
 					it('type the description as ' + listingsValues[i].postingDescription, async () => {
-						await UofC.setTextFieldValueByCSS('textarea[name=PostingBody]', listingsValues[i].postingDescription);
+						await TestApp.setTextFieldValueByCSS('textarea[name=PostingBody]', listingsValues[i].postingDescription);
 					});
 				});
 				
@@ -188,14 +188,14 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 				describe('set up the posting details values', () => {
 					//Rent
 					it('type the rent as ' + listingsValues[i].postingDetails.rentPrice, async () => {
-						await UofC.setTextFieldValueByCSS('input[name=price]', listingsValues[i].postingDetails.rentPrice);
+						await TestApp.setTextFieldValueByCSS('input[name=price]', listingsValues[i].postingDetails.rentPrice);
 					});
 					
 					
 					//SQFT (maybe switch the order)
 					if (listingsValues[i].postingDetails.sqft) {
 						it('type the sqft as ' + listingsValues[i].postingDetails.sqft, async () => {
-							await UofC.setTextFieldValueByCSS('input[name=Sqft]', listingsValues[i].postingDetails.sqft);
+							await TestApp.setTextFieldValueByCSS('input[name=Sqft]', listingsValues[i].postingDetails.sqft);
 						});
 					}
 					
@@ -308,35 +308,35 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					//Cats ok
 					if (listingsValues[i].postingDetails.catsOk) {
 						it('set the cats ok checkbox as ' + listingsValues[i].postingDetails.catsOk, async () => {
-							await UofC.setButtonCheckboxByCSS('input[name=pets_cat]', listingsValues[i].postingDetails.catsOk);
+							await TestApp.setButtonCheckboxByCSS('input[name=pets_cat]', listingsValues[i].postingDetails.catsOk);
 						});
 					}
 					
 					//Dogs ok
 					if (listingsValues[i].postingDetails.dogsOk) {
 						it('set the dogs ok checkbox as ' + listingsValues[i].postingDetails.dogsOk, async () => {
-							await UofC.setButtonCheckboxByCSS('input[name=pets_dog]', listingsValues[i].postingDetails.dogsOk);
+							await TestApp.setButtonCheckboxByCSS('input[name=pets_dog]', listingsValues[i].postingDetails.dogsOk);
 						});
 					}
 					
 					//Furnished
 					if (listingsValues[i].postingDetails.furnished) {
 						it('set the furnished checkbox as ' + listingsValues[i].postingDetails.furnished, async () => {
-							await UofC.setButtonCheckboxByCSS('input[name=is_furnished]', listingsValues[i].postingDetails.furnished);
+							await TestApp.setButtonCheckboxByCSS('input[name=is_furnished]', listingsValues[i].postingDetails.furnished);
 						});
 					}
 					
 					//No Smoking
 					if (listingsValues[i].postingDetails.noSmoking) {
 						it('set the furnished checkbox as ' + listingsValues[i].postingDetails.noSmoking, async () => {
-							await UofC.setButtonCheckboxByCSS('input[name=no_smoking]', listingsValues[i].postingDetails.noSmoking);
+							await TestApp.setButtonCheckboxByCSS('input[name=no_smoking]', listingsValues[i].postingDetails.noSmoking);
 						});
 					}
 					
 					//Wheelchair Accessible
 					if (listingsValues[i].postingDetails.wheelchairAccessible) {
 						it('set the furnished checkbox as ' + listingsValues[i].postingDetails.wheelchairAccessible, async () => {
-							await UofC.setButtonCheckboxByCSS('input[name=wheelchaccess]', listingsValues[i].postingDetails.wheelchairAccessible);
+							await TestApp.setButtonCheckboxByCSS('input[name=wheelchaccess]', listingsValues[i].postingDetails.wheelchairAccessible);
 						});
 					}
 					
@@ -344,7 +344,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					if (listingsValues[i].postingDetails.availableOn) {
 						describe('set up the available on and open house values', () => {
 							it('type the available on as ' + listingsValues[i].postingDetails.availableOn, async () => {
-								await UofC.setTextFieldValueByCSS('input[class*=movein_date][class*=datepicker]', listingsValues[i].postingDetails.availableOn);
+								await TestApp.setTextFieldValueByCSS('input[class*=movein_date][class*=datepicker]', listingsValues[i].postingDetails.availableOn);
 								let calendarElement = await driver.findElement(By.css('input[class*=movein_date][class*=datepicker]'));
 								await calendarElement.sendKeys('\n');
 								await driver.sleep(500);
@@ -448,38 +448,38 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					//show my phone
 					if (listingsValues[i].contactInfo.showMyPhoneNumber) {
 						it('set the show my phone number checkbox as ' + listingsValues[i].contactInfo.showMyPhoneNumber, async () => {
-							await UofC.setButtonCheckboxByCSS('input[name=show_phone_ok]', listingsValues[i].contactInfo.showMyPhoneNumber);
+							await TestApp.setButtonCheckboxByCSS('input[name=show_phone_ok]', listingsValues[i].contactInfo.showMyPhoneNumber);
 						});
 						
 						//phone calls ok
 						if (listingsValues[i].contactInfo.phoneCallsOk) {
 							it('set the phone calls OK checkbox as ' + listingsValues[i].contactInfo.phoneCallsOk, async () => {
-								await UofC.setButtonCheckboxByCSS('input[name=contact_phone_ok]', listingsValues[i].contactInfo.phoneCallsOk);
+								await TestApp.setButtonCheckboxByCSS('input[name=contact_phone_ok]', listingsValues[i].contactInfo.phoneCallsOk);
 							});
 						}
 						
 						//text/sms ok
 						if (listingsValues[i].contactInfo.textSmsOk) {
 							it('set the text/sms OK checkbox as ' + listingsValues[i].contactInfo.textSmsOk, async () => {
-								await UofC.setButtonCheckboxByCSS('input[name=contact_text_ok]', listingsValues[i].contactInfo.textSmsOk);
+								await TestApp.setButtonCheckboxByCSS('input[name=contact_text_ok]', listingsValues[i].contactInfo.textSmsOk);
 							});
 						}
 						
 						//Phone Number
 						it('type the phone number as ' + listingsValues[i].contactInfo.phoneNumber, async () => {
-							await UofC.setTextFieldValueByCSS('input[name=contact_phone]', listingsValues[i].contactInfo.phoneNumber);
+							await TestApp.setTextFieldValueByCSS('input[name=contact_phone]', listingsValues[i].contactInfo.phoneNumber);
 						});
 						
 						//Extension
 						if (listingsValues[i].contactInfo.extension) {
 							it('type the extension as ' + listingsValues[i].contactInfo.extension, async () => {
-								await UofC.setTextFieldValueByCSS('input[name=contact_phone_extension]', listingsValues[i].contactInfo.extension);
+								await TestApp.setTextFieldValueByCSS('input[name=contact_phone_extension]', listingsValues[i].contactInfo.extension);
 							});
 						}
 						
 						//Contact Name
 						it('type the contact name as ' + listingsValues[i].contactInfo.contactName, async () => {
-							await UofC.setTextFieldValueByCSS('input[name=contact_name]', listingsValues[i].contactInfo.contactName);
+							await TestApp.setTextFieldValueByCSS('input[name=contact_name]', listingsValues[i].contactInfo.contactName);
 						});
 					}
 				});
@@ -489,36 +489,36 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					describe('fill in the main post\'s fields', () => {
 						//show my address
 						it('set the show my address checkbox as true', async () => {
-							await UofC.setButtonCheckboxByCSS('input[name=show_address_ok]', true);
+							await TestApp.setButtonCheckboxByCSS('input[name=show_address_ok]', true);
 						});
 						
 						//Street
 						it('type the street as ' + listingsValues[i].locationInfo.street, async () => {
-							await UofC.setTextFieldValueByCSS('input[name=xstreet0]', listingsValues[i].locationInfo.street);
+							await TestApp.setTextFieldValueByCSS('input[name=xstreet0]', listingsValues[i].locationInfo.street);
 						});
 						
 						//Cross Street
 						if (listingsValues[i].locationInfo.crossStreet) {
 							it('type the cross street as ' + listingsValues[i].locationInfo.crossStreet, async () => {
-								await UofC.setTextFieldValueByCSS('input[name=xstreet1]', listingsValues[i].locationInfo.crossStreet);
+								await TestApp.setTextFieldValueByCSS('input[name=xstreet1]', listingsValues[i].locationInfo.crossStreet);
 							});
 						}
 						
 						//City
 						it('type the cross street as ' + listingsValues[i].locationInfo.city, async () => {
-							await UofC.setTextFieldValueByCSS('input[name=city]', listingsValues[i].locationInfo.city);
+							await TestApp.setTextFieldValueByCSS('input[name=city]', listingsValues[i].locationInfo.city);
 						});
 						
 						// OK for others to contact you about your services, products or commercial interests
 						if (listingsValues[i].okForOthersToContactAboutOtherServices) {
 							it('type the cross street as ' + listingsValues[i].okForOthersToContactAboutOtherServices, async () => {
-								await UofC.setButtonCheckboxByCSS('input[name=contact_ok]', listingsValues[i].okForOthersToContactAboutOtherServices);
+								await TestApp.setButtonCheckboxByCSS('input[name=contact_ok]', listingsValues[i].okForOthersToContactAboutOtherServices);
 							});
 						}
 						
 						// CLICK CONTINUE
 						it('click the continue button', async () => {
-							await UofC.clickElementByCSS('button[value=continue]');
+							await TestApp.clickElementByCSS('button[value=continue]');
 						});
 					});
 				}
@@ -526,7 +526,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 				//add map page displayed --- click Find or Continue ---- ADD ADDRESS (MAP) --- not sure how will do this
 				describe('add the map', () => {
 					it('wait for the add map page to load', async () => {
-						await UofC.waitForObjectLoad('#map', waitLong, 500, true);
+						await TestApp.waitForObjectLoad('#map', waitLong, 500, true);
 					});
 					
 					//maybe validate the correct values are displayed within the 'street', 'cross street', 'city' & 'postal code' fields - based on the inserted values
@@ -536,7 +536,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					/*
 					it('mouse hover the pin image on the map', async () => {
 						let pinImage = await driver.findElement(By.css('img.leaflet-marker-icon'));
-						await UofC.mouseHover(pinImage);
+						await TestApp.mouseHover(pinImage);
 						
 						await driver.executeScript('window.scrollBy(0, 200);', pinImage);
 					});
@@ -556,7 +556,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					
 					//click continue
 					it('click the continue button', async () => {
-						await UofC.clickElementByCSS('button[class*=continue]');    //<--- returns error if address is wrong/not found on the map
+						await TestApp.clickElementByCSS('button[class*=continue]');    //<--- returns error if address is wrong/not found on the map
 					});
 				});
 				
@@ -590,7 +590,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					// console.log('outside - imageFiles:' + imageFiles);
 					
 					it('wait for the add images page to load', async () => {
-						await UofC.waitForObjectLoad('#plupload', waitLong, 500, true);
+						await TestApp.waitForObjectLoad('#plupload', waitLong, 500, true);
 					});
 					
 					it('upload all images (' + imageFiles.length + ') of the ' + listingsValues[i].postingTitle + ' listing', async () => {
@@ -600,13 +600,13 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 						for (let i = 0; i < imageFiles.length; i++) {
 							attachmentImageFilePath = attachmentImagesFolderPath + '/' + imageFiles[i];
 							// NOTE: if below is not working then press the 'use classic uploader' and try again
-							await UofC.setFileUploadByCSS('input[id*=html][type=file]', attachmentImageFilePath);
+							await TestApp.setFileUploadByCSS('input[id*=html][type=file]', attachmentImageFilePath);
 							
 							//check the image upload block is displayed --- NOTE: can't always see it and fails here - to review later
 							/*
-							await UofC.waitForObjectLoad('.loading', waitLong * 2, 100, true);
-							await UofC.waitForObjectLoad('.ui-progressbar', waitShort, 100, true);
-							await UofC.waitForObjectLoad('.ui-progressbar-value', waitShort, 100, true);
+							await TestApp.waitForObjectLoad('.loading', waitLong * 2, 100, true);
+							await TestApp.waitForObjectLoad('.ui-progressbar', waitShort, 100, true);
+							await TestApp.waitForObjectLoad('.ui-progressbar-value', waitShort, 100, true);
 							*/
 							
 							// WAIT UNTIL THE IMAGE IS UPLOADED (THE IMAGE UPLOAD BLOCK IS GONE)
@@ -638,17 +638,17 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					
 					//click Done with Images -- when all uploaded
 					it('click the done button', async () => {
-						await UofC.clickElementByCSS('button.done');
+						await TestApp.clickElementByCSS('button.done');
 					});
 				});
 				
 				////VERIFY IF ALL ARE THERE NOW
 				describe('verify the posting preview has the correct data --- NOT FULLY DONE', () => {
 					it('wait for the posting preview page to load', async () => {
-						await UofC.waitForObjectLoad('.draft_warning', waitLong, 500, true);
+						await TestApp.waitForObjectLoad('.draft_warning', waitLong, 500, true);
 					});
 					
-					UofC.validateDisplayedTextContains('.draft_warning', 'this is an unpublished draft.');
+					TestApp.validateDisplayedTextContains('.draft_warning', 'this is an unpublished draft.');
 					
 					///TODO: validation after post created but not published
 					//validate the title is correct
@@ -668,34 +668,34 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 				describe('publish the posting and check it is displayed', () => {
 					////click PUBLISH button (if not Published - goes to Draft)
 					it('click publish button', async () => {
-						await UofC.clickElementByCSS('button.button');
+						await TestApp.clickElementByCSS('button.button');
 					});
 					
 					it('wait for the posting confirmation page to load', async () => {
-						await UofC.waitForObjectLoad('.new-form h4', waitLong * 5, 500, true);
+						await TestApp.waitForObjectLoad('.new-form h4', waitLong * 5, 500, true);
 					});
 					
-					UofC.validateDisplayedTextEquals('.new-form h4', 'Thanks for posting! We really appreciate it!');
+					TestApp.validateDisplayedTextEquals('.new-form h4', 'Thanks for posting! We really appreciate it!');
 					//next one does not work as the app is changing the title too much and cannot match it with our title
 					// AssertionError: expected 'vancouver.craigslist.org/van/apa/d/burnaby-3-bedroom-house-for-rent-in/6916127469.html'
 					// to include
 					// '3-bedroom-house-for-rent-in-burnaby' <--- here we have 35 chars but the order is different in the link so no match
-					// UofC.validateDisplayedTextContains('.new-form ul>li:nth-child(1) a', ((listingsValues[i].postingTitle).replace(/ /g, '-')).substring(0, 35));
+					// TestApp.validateDisplayedTextContains('.new-form ul>li:nth-child(1) a', ((listingsValues[i].postingTitle).replace(/ /g, '-')).substring(0, 35));
 					
 					it('sleep for ' + timer + ' seconds to randomize post\'s creation times', async () => {
 						driver.sleep(timer * 1000); //sleep for up to 10 seconds --- so the posts are created with diff random times
 					});
 					
 					it('navigate back to home page - click return to your account page link', async () => {
-						await UofC.clickElementByCSS('.new-form ul>li:nth-child(3) a');
+						await TestApp.clickElementByCSS('.new-form ul>li:nth-child(3) a');
 					});
 					
-					UofC.validateDisplayedTextEquals('.tabcontainer b', 'postings');
-					UofC.validateDisplayedTextEquals('p.postinglist_title', 'showing most recent');
+					TestApp.validateDisplayedTextEquals('.tabcontainer b', 'postings');
+					TestApp.validateDisplayedTextEquals('p.postinglist_title', 'showing most recent');
 					
 					it('validate the correct page has loaded -> account page + check posting is there - NOT FULLY DONE', async () => {
-						await UofC.waitForObjectLoad('.tabcontainer b', waitLong * 3, 500, true);
-						await UofC.waitForObjectLoad('p.postinglist_title', waitShort * 3, 500, true);
+						await TestApp.waitForObjectLoad('.tabcontainer b', waitLong * 3, 500, true);
+						await TestApp.waitForObjectLoad('p.postinglist_title', waitShort * 3, 500, true);
 						console.log('wait - validate posting created');
 					});
 				});

@@ -209,11 +209,11 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 							let housingTypeListElements = await driver.findElements(By.css('div.ui-selectmenu-menu>ul[aria-hidden=false]>li'));
 							if (housingTypeListElements.length > 0) {
 								let housingTypeListElementText;
-								for (let i = 0; i < housingTypeListElements.length; i++) {
-									housingTypeListElementText = await housingTypeListElements[i].getText();
+								for (let j = 0; j < housingTypeListElements.length; j++) {
+									housingTypeListElementText = await housingTypeListElements[j].getText();
 									if (housingTypeListElementText === listingsValues[i].postingDetails.housingType) {
-										await housingTypeListElements[i].click();
-										i = housingTypeListElements.length;
+										await housingTypeListElements[j].click();
+										j = housingTypeListElements.length;
 									}
 								}
 							}
@@ -230,11 +230,11 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 							let laundryListElements = await driver.findElements(By.css('div.ui-selectmenu-menu>ul[aria-hidden=false]>li'));
 							if (laundryListElements.length > 0) {
 								let laundryListElementText;
-								for (let i = 0; i < laundryListElements.length; i++) {
-									laundryListElementText = await laundryListElements[i].getText();
+								for (let j = 0; j < laundryListElements.length; j++) {
+									laundryListElementText = await laundryListElements[j].getText();
 									if (laundryListElementText === listingsValues[i].postingDetails.laundry) {
-										await laundryListElements[i].click();
-										i = laundryListElements.length;
+										await laundryListElements[j].click();
+										j = laundryListElements.length;
 									}
 								}
 							}
@@ -251,11 +251,11 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 							let parkingListElements = await driver.findElements(By.css('div.ui-selectmenu-menu>ul[aria-hidden=false]>li'));
 							if (parkingListElements.length > 0) {
 								let parkingListElementText;
-								for (let i = 0; i < parkingListElements.length; i++) {
-									parkingListElementText = await parkingListElements[i].getText();
+								for (let j = 0; j < parkingListElements.length; j++) {
+									parkingListElementText = await parkingListElements[j].getText();
 									if (parkingListElementText === listingsValues[i].postingDetails.parking) {
-										await parkingListElements[i].click();
-										i = parkingListElements.length;
+										await parkingListElements[j].click();
+										j = parkingListElements.length;
 									}
 								}
 							}

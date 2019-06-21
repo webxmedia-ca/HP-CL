@@ -663,11 +663,6 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					
 					//....etc - validate all possible values
 					
-					
-					
-					it('wait', async () => {
-						console.log('wait');
-					});
 				});
 				
 				describe('publish the posting and check it is displayed', () => {
@@ -677,7 +672,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					});
 					
 					it('wait for the posting confirmation page to load', async () => {
-						await UofC.waitForObjectLoad('.new-form h4', waitLong * 2, 500, true);
+						await UofC.waitForObjectLoad('.new-form h4', waitLong * 5, 500, true);
 					});
 					
 					UofC.validateDisplayedTextEquals('.new-form h4', 'Thanks for posting! We really appreciate it!');
@@ -699,8 +694,8 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					UofC.validateDisplayedTextEquals('p.postinglist_title', 'showing most recent');
 					
 					it('validate the correct page has loaded -> account page + check posting is there - NOT FULLY DONE', async () => {
-						await UofC.waitForObjectLoad('.tabcontainer b', waitLong * 2, 500, true);
-						await UofC.waitForObjectLoad('p.postinglist_title', waitShort * 2, 500, true);
+						await UofC.waitForObjectLoad('.tabcontainer b', waitLong * 3, 500, true);
+						await UofC.waitForObjectLoad('p.postinglist_title', waitShort * 3, 500, true);
 						console.log('wait - validate posting created');
 					});
 				});

@@ -52,7 +52,7 @@
     "networkLogs": true,
     "seleniumLogs": true,
     "video": true,
-    "local": true,
+    "local": false,
     "localIdentifier": "AutomationTest1"
   }
 }

@@ -585,7 +585,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					for (let i = 0; i < imageFiles.length; i++) {
 						//GET EACH NAME & ADD IT INTO THE imageFiles array
 						attachmentImageFilePath = attachmentImagesFolderPath + '/' + imageFiles[i];
-						console.log('attachmentImageFilePath: ' + attachmentImageFilePath);
+						// console.log('attachmentImageFilePath: ' + attachmentImageFilePath);
 					}
 					// console.log('outside - imageFiles:' + imageFiles);
 					

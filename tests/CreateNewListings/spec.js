@@ -65,7 +65,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 	
 	let timer;  //this is the timing randomizer for the posts creation - between 1 & 10 seconds
 	for (let i = 0; i< listingsValues.length; i++) {
-		timer = Math.floor((Math.random() * 10) + 1); //randomize the wait time between posts creation
+		timer = Math.floor((Math.random() * 20) + 1); //randomize the wait time between posts creation
 		
 		describe('# ' + (i + 1) + '. add a new post with the ' + listingsValues[i].postingTitle + ' title', () => {
 			describe('creating the new post within the ' + listingsValues[i].postingRegionLocation + ' area', () => {
@@ -115,6 +115,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 			
 			describe('choose the type', () => {
 				it('set the type of posting as ' + listingsValues[i].typeOfPosting, async () => {
+					await driver.sleep(timer * 500);
 					await TestApp.setButtonRadioFieldValueByCSS('.picker>.selection-list input', listingsValues[i].typeOfPosting);    //'ho'
 				});
 				
@@ -145,6 +146,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					
 					//now select the radio btn
 					await TestApp.setButtonRadioFieldValueByCSS('.variant-radio input', listingsValues[i].postingCategory); //'1' = apts/housing for rent
+					await driver.sleep(timer * 500);
 				});
 				
 				it('validate the correct page has loaded -> create posting', async () => {
@@ -181,6 +183,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					//Description
 					it('type the description as ' + listingsValues[i].postingDescription, async () => {
 						await TestApp.setTextFieldValueByCSS('textarea[name=PostingBody]', listingsValues[i].postingDescription);
+						await driver.sleep(timer * 500);
 					});
 				});
 				
@@ -196,6 +199,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					if (listingsValues[i].postingDetails.sqft) {
 						it('type the sqft as ' + listingsValues[i].postingDetails.sqft, async () => {
 							await TestApp.setTextFieldValueByCSS('input[name=Sqft]', listingsValues[i].postingDetails.sqft);
+							await driver.sleep(timer * 500);
 						});
 					}
 					
@@ -225,6 +229,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 						it('select the laundry as ' + listingsValues[i].postingDetails.laundry, async () => {
 							await driver.wait(until.elementLocated(By.css('label[class*=laundry] span.ui-widget')), waitLong);
 							let laundryDropDownElement = await driver.findElement(By.css('label[class*=laundry] span.ui-widget'));
+							await driver.sleep(timer * 500);
 							await laundryDropDownElement.click();
 							
 							let laundryListElements = await driver.findElements(By.css('div.ui-selectmenu-menu>ul[aria-hidden=false]>li'));
@@ -233,6 +238,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 								for (let j = 0; j < laundryListElements.length; j++) {
 									laundryListElementText = await laundryListElements[j].getText();
 									if (laundryListElementText === listingsValues[i].postingDetails.laundry) {
+										await driver.sleep(timer * 100);
 										await laundryListElements[j].click();
 										j = laundryListElements.length;
 									}
@@ -246,6 +252,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 						it('select the parking as ' + listingsValues[i].postingDetails.parking, async () => {
 							await driver.wait(until.elementLocated(By.css('label[class*=parking] span.ui-widget')), waitLong);
 							let parkingDropDownElement = await driver.findElement(By.css('label[class*=parking] span.ui-widget'));
+							await driver.sleep(timer * 500);
 							await parkingDropDownElement.click();
 							
 							let parkingListElements = await driver.findElements(By.css('div.ui-selectmenu-menu>ul[aria-hidden=false]>li'));
@@ -254,6 +261,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 								for (let j = 0; j < parkingListElements.length; j++) {
 									parkingListElementText = await parkingListElements[j].getText();
 									if (parkingListElementText === listingsValues[i].postingDetails.parking) {
+										await driver.sleep(timer * 100);
 										await parkingListElements[j].click();
 										j = parkingListElements.length;
 									}
@@ -267,6 +275,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 						it('select the bedrooms as ' + listingsValues[i].postingDetails.bedrooms, async () => {
 							await driver.wait(until.elementLocated(By.css('label[class*=Bedrooms] span.ui-widget')), waitLong);
 							let bedroomsDropDownElement = await driver.findElement(By.css('label[class*=Bedrooms] span.ui-widget'));
+							await driver.sleep(timer * 500);
 							await bedroomsDropDownElement.click();
 							
 							let bedroomsListElements = await driver.findElements(By.css('div.ui-selectmenu-menu>ul[aria-hidden=false]>li'));
@@ -275,6 +284,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 								for (let j = 0; j < bedroomsListElements.length; j++) {
 									bedroomsListElementText = await bedroomsListElements[j].getText();
 									if (bedroomsListElementText === listingsValues[i].postingDetails.bedrooms) {
+										await driver.sleep(timer * 100);
 										await bedroomsListElements[j].click();
 										j = bedroomsListElements.length;
 									}
@@ -296,6 +306,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 								for (let j = 0; j < bathroomsListElements.length; j++) {
 									bathroomsListElementText = await bathroomsListElements[j].getText();
 									if (bathroomsListElementText === listingsValues[i].postingDetails.bathrooms) {
+										await driver.sleep(timer * 100);
 										await bathroomsListElements[j].click();
 										j = bathroomsListElements.length;
 									}
@@ -344,6 +355,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					if (listingsValues[i].postingDetails.availableOn) {
 						describe('set up the available on and open house values', () => {
 							it('type the available on as ' + listingsValues[i].postingDetails.availableOn, async () => {
+								await driver.sleep(timer * 500);
 								await TestApp.setTextFieldValueByCSS('input[class*=movein_date][class*=datepicker]', listingsValues[i].postingDetails.availableOn);
 								let calendarElement = await driver.findElement(By.css('input[class*=movein_date][class*=datepicker]'));
 								await calendarElement.sendKeys('\n');
@@ -362,6 +374,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 										for (let i = 0; i < openHouseListElements.length; i++) {
 											openHouseListElementText = await openHouseListElements[i].getText();
 											if (openHouseListElementText === listingsValues[i].postingDetails.openHouseDates1) {
+												await driver.sleep(timer * 100);
 												await openHouseListElements[i].click();
 												i = openHouseListElements.length;
 											}
@@ -382,6 +395,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 										for (let i = 0; i < openHouseListElements.length; i++) {
 											openHouseListElementText = await openHouseListElements[i].getText();
 											if (openHouseListElementText === listingsValues[i].postingDetails.openHouseDates2) {
+												await driver.sleep(timer * 100);
 												await openHouseListElements[i].click();
 												i = openHouseListElements.length;
 											}
@@ -394,6 +408,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 								it('select the open house date #3 as ' + listingsValues[i].postingDetails.openHouseDates3, async () => {
 									await driver.wait(until.elementLocated(By.css('label[class*=sale_date_3] span.ui-widget')), waitLong);
 									let openHouseDropDownElementThree = await driver.findElement(By.css('label[class*=sale_date_3] span.ui-widget'));
+									await driver.sleep(timer * 100);
 									await openHouseDropDownElementThree.click();
 									
 									let openHouseListElements = await driver.findElements(By.css('div.ui-selectmenu-menu>ul[aria-hidden=false]>li'));
@@ -402,6 +417,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 										for (let i = 0; i < openHouseListElements.length; i++) {
 											openHouseListElementText = await openHouseListElements[i].getText();
 											if (openHouseListElementText === listingsValues[i].postingDetails.openHouseDates3) {
+												await driver.sleep(timer * 100);
 												await openHouseListElements[i].click();
 												i = openHouseListElements.length;
 											}
@@ -417,6 +433,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 				describe('set up the contact info values', () => {
 					//email privacy options
 					it('set the email privacy options radio button as ' + listingsValues[i].contactInfo.emailPrivacy, async () => {
+						await driver.sleep(timer * 500);
 						const radioButtonElements = await driver.findElements(By.css('div.email-privacy .radio-option input'));
 						if (radioButtonElements.length > 0) {
 							let radioButtonElement, radioButtonLabel, radioButtonText;
@@ -448,6 +465,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					//show my phone
 					if (listingsValues[i].contactInfo.showMyPhoneNumber) {
 						it('set the show my phone number checkbox as ' + listingsValues[i].contactInfo.showMyPhoneNumber, async () => {
+							await driver.sleep(timer * 100);
 							await TestApp.setButtonCheckboxByCSS('input[name=show_phone_ok]', listingsValues[i].contactInfo.showMyPhoneNumber);
 						});
 						
@@ -467,6 +485,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 						
 						//Phone Number
 						it('type the phone number as ' + listingsValues[i].contactInfo.phoneNumber, async () => {
+							await driver.sleep(timer * 100);
 							await TestApp.setTextFieldValueByCSS('input[name=contact_phone]', listingsValues[i].contactInfo.phoneNumber);
 						});
 						
@@ -479,6 +498,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 						
 						//Contact Name
 						it('type the contact name as ' + listingsValues[i].contactInfo.contactName, async () => {
+							await driver.sleep(timer * 100);
 							await TestApp.setTextFieldValueByCSS('input[name=contact_name]', listingsValues[i].contactInfo.contactName);
 						});
 					}
@@ -512,13 +532,16 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 						// OK for others to contact you about your services, products or commercial interests
 						if (listingsValues[i].okForOthersToContactAboutOtherServices) {
 							it('type the cross street as ' + listingsValues[i].okForOthersToContactAboutOtherServices, async () => {
+								await driver.sleep(timer * 100);
 								await TestApp.setButtonCheckboxByCSS('input[name=contact_ok]', listingsValues[i].okForOthersToContactAboutOtherServices);
 							});
 						}
 						
 						// CLICK CONTINUE
 						it('click the continue button', async () => {
+							await driver.sleep(timer * 100);
 							await TestApp.clickElementByCSS('button[value=continue]');
+							await driver.sleep(timer * 500);
 						});
 					});
 				}
@@ -557,6 +580,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					//click continue
 					it('click the continue button', async () => {
 						await TestApp.clickElementByCSS('button[class*=continue]');    //<--- returns error if address is wrong/not found on the map
+						await driver.sleep(timer * 500);
 					});
 				});
 				
@@ -601,6 +625,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 							attachmentImageFilePath = attachmentImagesFolderPath + '/' + imageFiles[i];
 							// NOTE: if below is not working then press the 'use classic uploader' and try again
 							await TestApp.setFileUploadByCSS('input[id*=html][type=file]', attachmentImageFilePath);
+							await driver.sleep(500);
 							
 							//check the image upload block is displayed --- NOTE: can't always see it and fails here - to review later
 							/*
@@ -638,7 +663,9 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					
 					//click Done with Images -- when all uploaded
 					it('click the done button', async () => {
+						await driver.sleep(timer * 10);
 						await TestApp.clickElementByCSS('button.done');
+						await driver.sleep(timer * 100);
 					});
 				});
 				
@@ -668,6 +695,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 				describe('publish the posting and check it is displayed', () => {
 					////click PUBLISH button (if not Published - goes to Draft)
 					it('click publish button', async () => {
+						await driver.sleep(timer * 100);
 						await TestApp.clickElementByCSS('button.button');
 					});
 					
@@ -683,11 +711,12 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					// TestApp.validateDisplayedTextContains('.new-form ul>li:nth-child(1) a', ((listingsValues[i].postingTitle).replace(/ /g, '-')).substring(0, 35));
 					
 					it('sleep for ' + timer + ' seconds to randomize post\'s creation times', async () => {
-						driver.sleep(timer * 1000); //sleep for up to 10 seconds --- so the posts are created with diff random times
+						await driver.sleep(timer * 1000); //sleep for up to 10 seconds --- so the posts are created with diff random times
 					});
 					
 					it('navigate back to home page - click return to your account page link', async () => {
 						await TestApp.clickElementByCSS('.new-form ul>li:nth-child(3) a');
+						await driver.sleep(timer * 100);
 					});
 					
 					TestApp.validateDisplayedTextEquals('.tabcontainer b', 'postings');

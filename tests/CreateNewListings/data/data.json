@@ -472,6 +472,49 @@
 				"city": "Vancouver"
 			},
 			"okForOthersToContactAboutOtherServices": false
+		},
+		{
+			"postingRegionLocation": "vancouver, BC, BC, CA",
+			"locationThatFitsBest": "1",
+			"typeOfPosting": "ho",
+			"postingCategory": "1",
+			"postingTitle": "8 Bedroom Gorgeous House for Rent in White Rock",
+			"cityOrNeighborhood": "White Rock, 15767 Pacific Ave",
+			"postalCode": "V4B1S5",
+			"postingDescription": "Luxury living at its best! This over 6000 SqFT beautiful home located in the heart of White Rock has spectacular panoramic ocean views. Absolutely charming, this house has an open concept living with the ease of a built in elevator for easy access to all floors. Top of the line finishings galore, quality euro-tiles and hardwood throughout, 2 gas fireplaces, built in a/c &amp; chef's delight gourmet kitchen with separate pantry and massive living area perfect for entertaining. Also incl. are 2 large master bedrooms, 6 bathrooms, 2 powder. Private covered terrace on 2 levels to enjoy views from sunrise to sunset. Basement includes large 2 bdrm suite and theater room. Heated garage lots parking avail. for RV, boat, motorhome. Cleaner air &amp; more sunshine too!\n\nPlease book your showing at: https://showmojo.com/l/b7946cc078/15767-pacific-ave-white-rock-bc",
+			"postingDetails": {
+				"rentPrice": "12995",
+				"sqft": "6386",
+				"housingType": "house",
+				"laundry": "w/d in unit",
+				"parking": "attached garage",
+				"bedrooms": "8",
+				"bathrooms": "7.5",
+				"catsOk": false,
+				"dogsOk": false,
+				"furnished": false,
+				"noSmoking": true,
+				"wheelchairAccessible": false,
+				"availableOn": "Mon, 24 Jun 2019",
+				"openHouseDates1": null,
+				"openHouseDates2": null,
+				"openHouseDates3": null
+			},
+			"contactInfo": {
+				"emailPrivacy": "no replies to this email",
+				"showMyPhoneNumber": true,
+				"phoneCallsOk": true,
+				"textSmsOk": true,
+				"phoneNumber": "(778) 656-0007",
+				"extension": null,
+				"contactName": "Ravi"
+			},
+			"locationInfo": {
+				"street": "15767 Pacific Ave",
+				"crossStreet": null,
+				"city": "White Rock"
+			},
+			"okForOthersToContactAboutOtherServices": false
 		}
 	]
 }

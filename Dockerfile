@@ -12,23 +12,23 @@ FROM node:8.12.0
 ARG VERSION=1.0.0
 
 # Copy the application files
-RUN mkdir -p /ucautomation
-WORKDIR /ucautomation
-COPY package.json /ucautomation
+RUN mkdir -p /HSCLAutomation
+WORKDIR /HSCLAutomation
+COPY package.json /HSCLAutomation
 
 #RUN ["npm", "install"]
 RUN npm install
 
 #the one below - not sure if needed !!!!!!
-LABEL license=MIT version=$VERSION authors=ValeriuJecov Description="This image is used to do run automation testing" Vendor="WebXMedia"
+LABEL license=MIT version=$VERSION authors=ValeriuJecov Description="This image is used to do run the CreateNewListings script for CraigList" Vendor="WebXMedia"
 
 #new stuff --------------------------------------------------------:
 #without this stuff, manually runnning the tests won't work (from bash cmd)
-#COPY .jshintrc /ucautomation
-#COPY browserstack.json /ucautomation
-#COPY GruntFile.js /ucautomation
-#COPY LICENSE /ucautomation
-#COPY README.md /ucautomation
+#COPY .jshintrc /HSCLAutomation
+#COPY browserstack.json /HSCLAutomation
+#COPY GruntFile.js /HSCLAutomation
+#COPY LICENSE /HSCLAutomation
+#COPY README.md /HSCLAutomation
 
 #RUN mkdir -p config; mkdir -p grunt; mkdir -p lib;
 #COPY config config/
@@ -43,24 +43,24 @@ LABEL license=MIT version=$VERSION authors=ValeriuJecov Description="This image 
 #COPY Dockerfile
 #COPY .dockerignore
 #COPY docker-compose.yml
-#COPY ucautomation.iml /ucautomation
+#COPY HSCLAutomation.iml /HSCLAutomation
 
-#RUN mkdir -p /ucautomation/lib/basic-auth-chrome-proxy
-#COPY lib /ucautomation/lib/basic-auth-chrome-proxy
-#RUN mkdir -p /ucautomation/lib/basic-auth-chrome-proxy/app-internal-proxy
-#COPY lib /ucautomation/lib/basic-auth-chrome-proxy/app-internal-proxy
-#RUN mkdir -p /ucautomation/lib/ext
-#COPY lib /ucautomation/lib/ext
+#RUN mkdir -p /HSCLAutomation/lib/basic-auth-chrome-proxy
+#COPY lib /HSCLAutomation/lib/basic-auth-chrome-proxy
+#RUN mkdir -p /HSCLAutomation/lib/basic-auth-chrome-proxy/app-internal-proxy
+#COPY lib /HSCLAutomation/lib/basic-auth-chrome-proxy/app-internal-proxy
+#RUN mkdir -p /HSCLAutomation/lib/ext
+#COPY lib /HSCLAutomation/lib/ext
 
-#RUN mkdir -p /ucautomation/lib/UofC
-#COPY lib/UofC /ucautomation/lib/UofC/
-#COPY lib/UofC/Grid.js /ucautomation/lib/UofC
-#COPY lib/harness.js /ucautomation/lib/
-#COPY lib/harness-json.js /ucautomation/lib/
-#COPY lib/jira-updater.js /ucautomation/lib/
-#COPY lib/Common.js /ucautomation/lib/
-#COPY lib/AppRelated-General.js /ucautomation/lib/
-#COPY lib/AppRelated-PageObjectModel.js /ucautomation/lib/
+#RUN mkdir -p /HSCLAutomation/lib/UofC
+#COPY lib/UofC /HSCLAutomation/lib/UofC/
+#COPY lib/UofC/Grid.js /HSCLAutomation/lib/UofC
+#COPY lib/harness.js /HSCLAutomation/lib/
+#COPY lib/harness-json.js /HSCLAutomation/lib/
+#COPY lib/jira-updater.js /HSCLAutomation/lib/
+#COPY lib/Common.js /HSCLAutomation/lib/
+#COPY lib/AppRelated-General.js /HSCLAutomation/lib/
+#COPY lib/AppRelated-PageObjectModel.js /HSCLAutomation/lib/
 #####--------------------------------------------------------------------------------#####
 
 
@@ -72,6 +72,6 @@ LABEL license=MIT version=$VERSION authors=ValeriuJecov Description="This image 
 #RUN ["npm", "install"]
 #RUN npm install
 
-#next line will copy the entire content of the ucautomation folder into the docker image
+#next line will copy the entire content of the HSCLAutomation folder into the docker image
 # ignoring the files & folders specified in the '.dockerignore' file
-COPY . /ucautomation
+COPY . /HSCLAutomation

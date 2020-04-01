@@ -1,5 +1,6 @@
 # HopeS's Automated Tests - Craiglist Postings
-This repo defines the automated tests suites for HopeS. The git url is: https://github.com/webxmedia-ca/HP-CL
+This repo defines the automated tests suites for HopeS.
+The git url is: https://gitlab.com/3learner/hpcl (was: https://github.com/webxmedia-ca/HP-CL)
 
 
 # Dependencies

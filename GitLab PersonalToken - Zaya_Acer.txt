@@ -1,0 +1,2 @@
+TOKEN:	c4zWir-mR6y15SdsVZya
+USAGE:	git clone https://oauth2:c4zWir-mR6y15SdsVZya@gitlab.com/3learner/hpcl.git HP-CL-GitLab

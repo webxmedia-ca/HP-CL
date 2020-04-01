@@ -66,6 +66,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 	let timer;  //this is the timing randomizer for the posts creation - between 1 & 10 seconds
 	for (let i = 0; i< listingsValues.length; i++) {
 		timer = Math.floor((Math.random() * 20) + 1); //randomize the wait time between posts creation
+		console.log('\n\nTIMER: ' + timer + '\n\n');
 		
 		describe('# ' + (i + 1) + '. add a new post with the ' + listingsValues[i].postingTitle + ' title', () => {
 			describe('creating the new post within the ' + listingsValues[i].postingRegionLocation + ' area', () => {
@@ -217,6 +218,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 									housingTypeListElementText = await housingTypeListElements[j].getText();
 									if (housingTypeListElementText === listingsValues[i].postingDetails.housingType) {
 										await housingTypeListElements[j].click();
+										await driver.sleep(500);    // wait for the drop down to be closed
 										j = housingTypeListElements.length;
 									}
 								}
@@ -240,6 +242,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 									if (laundryListElementText === listingsValues[i].postingDetails.laundry) {
 										await driver.sleep(timer * 100);
 										await laundryListElements[j].click();
+										await driver.sleep(500);    // wait for the drop down to be closed
 										j = laundryListElements.length;
 									}
 								}
@@ -263,6 +266,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 									if (parkingListElementText === listingsValues[i].postingDetails.parking) {
 										await driver.sleep(timer * 100);
 										await parkingListElements[j].click();
+										await driver.sleep(500);    // wait for the drop down to be closed
 										j = parkingListElements.length;
 									}
 								}
@@ -286,6 +290,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 									if (bedroomsListElementText === listingsValues[i].postingDetails.bedrooms) {
 										await driver.sleep(timer * 100);
 										await bedroomsListElements[j].click();
+										await driver.sleep(500);    // wait for the drop down to be closed
 										j = bedroomsListElements.length;
 									}
 								}
@@ -308,6 +313,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 									if (bathroomsListElementText === listingsValues[i].postingDetails.bathrooms) {
 										await driver.sleep(timer * 100);
 										await bathroomsListElements[j].click();
+										await driver.sleep(500);    // wait for the drop down to be closed
 										j = bathroomsListElements.length;
 									}
 								}
@@ -348,6 +354,13 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					if (listingsValues[i].postingDetails.wheelchairAccessible) {
 						it('set the furnished checkbox as ' + listingsValues[i].postingDetails.wheelchairAccessible, async () => {
 							await TestApp.setButtonCheckboxByCSS('input[name=wheelchaccess]', listingsValues[i].postingDetails.wheelchairAccessible);
+						});
+					}
+					
+					//EV Charging
+					if (listingsValues[i].postingDetails.evCharging) {
+						it('set the furnished checkbox as ' + listingsValues[i].postingDetails.evCharging, async () => {
+							await TestApp.setButtonCheckboxByCSS('input[name=ev_charging]', listingsValues[i].postingDetails.evCharging);
 						});
 					}
 					
@@ -429,6 +442,14 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					}
 				});
 				
+				
+				
+				/////// [2019.08.07] NEW SECTION -- FEES AND LICENSURE
+				// BROKER FEE
+				// APPLICATION FEE
+				
+				
+				
 				/////// CONTACT INFO
 				describe('set up the contact info values', () => {
 					//email privacy options
@@ -437,26 +458,27 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 						const radioButtonElements = await driver.findElements(By.css('div.email-privacy .radio-option input'));
 						if (radioButtonElements.length > 0) {
 							let radioButtonElement, radioButtonLabel, radioButtonText;
-							for (let i = 0; i < radioButtonElements.length; i++) {
-								radioButtonElement = await radioButtonElements[i].findElement(By.xpath('..'));
+							for (let j = 0; j < radioButtonElements.length; j++) {
+								radioButtonElement = await radioButtonElements[j].findElement(By.xpath('..'));
 								radioButtonLabel = await radioButtonElement.findElement(By.css('span'));
 								radioButtonText = await radioButtonLabel.getText();
 								if (radioButtonText === listingsValues[i].contactInfo.emailPrivacy &&
 									radioButtonText === 'CL mail relay (recommended)') {
 									await radioButtonElements[0].click();
-									i = radioButtonElements.length;
+									j = radioButtonElements.length;
 								}
 								
-								if (radioButtonText === listingsValues[i].contactInfo.emailPrivacy &&
-									radioButtonText === 'show my real email address') {
-									await radioButtonElements[1].click();
-									i = radioButtonElements.length;
-								}
+								//[2019.08.05] -- this option seems to not be available anymore
+								// if (radioButtonText === listingsValues[i].contactInfo.emailPrivacy &&
+								// 	radioButtonText === 'show my real email address') {
+								// 	await radioButtonElements[1].click();
+								// 	j = radioButtonElements.length;
+								// }
 								
 								if (radioButtonText === listingsValues[i].contactInfo.emailPrivacy &&
 									radioButtonText === 'no replies to this email') {
-									await radioButtonElements[2].click();
-									i = radioButtonElements.length;
+									await radioButtonElements[1].click();
+									j = radioButtonElements.length;
 								}
 							}
 						}
@@ -506,7 +528,7 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 				
 				/////// LOCATION INFO
 				if (listingsValues[i].locationInfo) {
-					describe('fill in the main post\'s fields', () => {
+					describe('fill in the location info post\'s fields', () => {
 						//show my address
 						it('set the show my address checkbox as true', async () => {
 							await TestApp.setButtonCheckboxByCSS('input[name=show_address_ok]', true);
@@ -548,6 +570,15 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 				
 				//add map page displayed --- click Find or Continue ---- ADD ADDRESS (MAP) --- not sure how will do this
 				describe('add the map', () => {
+					if (!listingsValues[i].locationInfo) {
+						// CLICK CONTINUE WHEN NO LOCATION INFO WAS ADDED ABOVE
+						it('click the continue button', async () => {
+							await driver.sleep(timer * 100);
+							await TestApp.clickElementByCSS('button[value=continue]');
+							await driver.sleep(timer * 500);
+						});
+					}
+					
 					it('wait for the add map page to load', async () => {
 						await TestApp.waitForObjectLoad('#map', waitLong, 500, true);
 					});
@@ -606,9 +637,9 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 					imageFiles = fs.readdirSync(attachmentImagesFolderPath);
 					
 					//this FOR is not needed - TEMP
-					for (let i = 0; i < imageFiles.length; i++) {
+					for (let j = 0; j < imageFiles.length; j++) {
 						//GET EACH NAME & ADD IT INTO THE imageFiles array
-						attachmentImageFilePath = attachmentImagesFolderPath + '/' + imageFiles[i];
+						attachmentImageFilePath = attachmentImagesFolderPath + '/' + imageFiles[j];
 						// console.log('attachmentImageFilePath: ' + attachmentImageFilePath);
 					}
 					// console.log('outside - imageFiles:' + imageFiles);
@@ -621,8 +652,8 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 						//driver.findElement(By.id("input1")).sendKeys("path/to/first/file-001 \n path/to/first/file-002 \n path/to/first/file-003");
 						
 						//upload all of them one by one
-						for (let i = 0; i < imageFiles.length; i++) {
-							attachmentImageFilePath = attachmentImagesFolderPath + '/' + imageFiles[i];
+						for (let j = 0; j < imageFiles.length; j++) {
+							attachmentImageFilePath = attachmentImagesFolderPath + '/' + imageFiles[j];
 							// NOTE: if below is not working then press the 'use classic uploader' and try again
 							await TestApp.setFileUploadByCSS('input[id*=html][type=file]', attachmentImageFilePath);
 							await driver.sleep(500);
@@ -637,8 +668,8 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 							// WAIT UNTIL THE IMAGE IS UPLOADED (THE IMAGE UPLOAD BLOCK IS GONE)
 							let imageUploaderProgressBar = await driver.findElements(By.css('.ui-progressbar-value'));
 							if (imageUploaderProgressBar.length > 0) {
-								let i = 0;
-								while (i < 10 && imageUploaderProgressBar.length > 0) {// && elementSpinner) {
+								let k = 0;
+								while (k < 10 && imageUploaderProgressBar.length > 0) {// && elementSpinner) {
 									// console.log('\n\n\nspinner found - waiting while it is there, i=' + i);
 									await driver.sleep(waitLong * 2);
 									
@@ -646,11 +677,11 @@ describe('appName: ' + harness.getCommandLineArgs().appName + ' (user: ' + harne
 									imageUploaderProgressBar = await driver.findElements(By.css('.ui-progressbar-value'));
 									
 									if (imageUploaderProgressBar.length === 0) {
-										i = 10;
+										k = 10;
 									} else if (imageUploaderProgressBar > 0) {
 										imageUploaderProgressBar = await driver.findElements(By.css('.ui-progressbar-value'));
-										i++;
-										if (i === 10 && imageUploaderProgressBar.length > 0) {
+										k++;
+										if (k === 10 && imageUploaderProgressBar.length > 0) {
 											console.warn('WARNING: image loading block is not gone yet, waited ' +
 												(waitLong * 10) + ' seconds for it to disappear but it did not');
 										}
